@@ -1,0 +1,88 @@
+buffers: {
+    size_kb: 63488
+    fill_policy: DISCARD
+}
+buffers: {
+    size_kb: 2048
+    fill_policy: DISCARD
+}
+data_sources: {
+    config {
+        name: "linux.process_stats"
+        target_buffer: 1
+        process_stats_config {
+            scan_all_processes_on_start: true
+            proc_stats_poll_ms: 1000
+        }
+    }
+}
+data_sources: {
+    config {
+        name: "android.surfaceflinger.frametimeline"
+    }
+}
+data_sources: {
+    config {
+        name: "linux.sys_stats"
+        sys_stats_config {
+            meminfo_period_ms: 1000
+            meminfo_counters: MEMINFO_ACTIVE
+            meminfo_counters: MEMINFO_ACTIVE_ANON
+            meminfo_counters: MEMINFO_ACTIVE_FILE
+            meminfo_counters: MEMINFO_ANON_PAGES
+            meminfo_counters: MEMINFO_BUFFERS
+            meminfo_counters: MEMINFO_CACHED
+            meminfo_counters: MEMINFO_CMA_FREE
+            meminfo_counters: MEMINFO_CMA_TOTAL
+            meminfo_counters: MEMINFO_COMMIT_LIMIT
+            meminfo_counters: MEMINFO_COMMITED_AS
+            meminfo_counters: MEMINFO_DIRTY
+            meminfo_counters: MEMINFO_INACTIVE
+            meminfo_counters: MEMINFO_INACTIVE_ANON
+            meminfo_counters: MEMINFO_INACTIVE_FILE
+            meminfo_counters: MEMINFO_KERNEL_STACK
+            meminfo_counters: MEMINFO_MAPPED
+            meminfo_counters: MEMINFO_MEM_AVAILABLE
+            meminfo_counters: MEMINFO_MEM_FREE
+            meminfo_counters: MEMINFO_MEM_TOTAL
+            meminfo_counters: MEMINFO_MLOCKED
+            meminfo_counters: MEMINFO_PAGE_TABLES
+            meminfo_counters: MEMINFO_SHMEM
+            meminfo_counters: MEMINFO_SLAB
+            meminfo_counters: MEMINFO_SLAB_RECLAIMABLE
+            meminfo_counters: MEMINFO_SLAB_UNRECLAIMABLE
+            meminfo_counters: MEMINFO_SWAP_CACHED
+            meminfo_counters: MEMINFO_SWAP_FREE
+            meminfo_counters: MEMINFO_SWAP_TOTAL
+            meminfo_counters: MEMINFO_UNEVICTABLE
+            meminfo_counters: MEMINFO_VMALLOC_CHUNK
+            meminfo_counters: MEMINFO_VMALLOC_TOTAL
+            meminfo_counters: MEMINFO_VMALLOC_USED
+            meminfo_counters: MEMINFO_WRITEBACK
+        }
+    }
+}
+data_sources: {
+    config {
+        name: "linux.ftrace"
+        ftrace_config {
+            ftrace_events: "binder/*"
+            ftrace_events: "oom/*"
+            ftrace_events: "mm_event/mm_event_record"
+            ftrace_events: "kmem/rss_stat"
+            ftrace_events: "ion/ion_stat"
+            ftrace_events: "dmabuf_heap/dma_heap_stat"
+            ftrace_events: "kmem/ion_heap_grow"
+            ftrace_events: "kmem/ion_heap_shrink"
+            ftrace_events: "sched/sched_process_exit"
+            ftrace_events: "sched/sched_process_free"
+            ftrace_events: "task/task_newtask"
+            ftrace_events: "task/task_rename"
+            ftrace_events: "lowmemorykiller/lowmemory_kill"
+            ftrace_events: "oom/oom_score_adj_update"
+            ftrace_events: "ftrace/print"
+            atrace_apps: "lmkd"
+        }
+    }
+}
+duration_ms: 60000
